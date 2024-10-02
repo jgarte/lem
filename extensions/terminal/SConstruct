@@ -1,0 +1,10 @@
+import os
+
+env = Environment()
+env.ParseConfig("pkg-config --cflags --libs vterm")
+env.Append(LIBS=['vterm'])
+env.Append(CFLAGS=['-shared', '-fPIC'])
+output_dir = 'lib/linux/x64'
+shared_lib = env.SharedLibrary('terminal', 'terminal.c')
+env.Install(output_dir, shared_lib)
+env.SharedLibrary('terminal', 'terminal.c')
